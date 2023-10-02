@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  chanchito:  # container
+    build: .    #aplicacion local
+    ports:
+      - "3000:3000"
+    links:
+      - monguito  #container al que se va a enlazar chanchito
+  monguito: # container
+    image: mongo # inagen
+    ports:
+      - "27017:27017"  # Puerto de mi sistema Operativo :  Puerto del contenedor, 
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=fvasquez   #variables de entorno para mongo
+      - MONGO_INITDB_ROOT_PASSWORD=password    #variables de entorno para mongo
+    volumes:
+      - mongo-data:/data/db
+      # mysql -> /var/lib/mysql
+      # postgres -> /var/lib/postgresql/data
+
+volumes:
+  mongo-data:
+
+
+
+# para correr este codigo se usa
+# docker compose up
+# para eliminar todo
+# docker compose down
